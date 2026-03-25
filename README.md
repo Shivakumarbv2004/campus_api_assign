@@ -1,8 +1,36 @@
-# AI API Integration
+# 🤖 AI API Integration
 
-A Python project that connects to **5 different AI providers** — Groq, Ollama, Hugging Face, Google Gemini, and Cohere — through individual scripts and a unified multi-provider interface.
+> Connect to 5 different AI providers through clean Python scripts and a unified CLI interface.
+> Built for the **CampusPe Generative AI** course assignment.
 
-Built for the CampusPe Generative AI course assignment.
+---
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [API Keys](#api-keys)
+- [Running the Programs](#running-the-programs)
+- [Bonus: Multi-API Query](#bonus-multi-api-query)
+- [Screenshots](#screenshots)
+- [Notes](#notes)
+
+---
+
+## Overview
+
+This project demonstrates how to integrate with multiple Generative AI APIs using Python. Each provider gets its own standalone script with proper error handling, environment variable support, and clean output formatting.
+
+**Providers covered:**
+
+| # | Provider | Model Used | Type |
+|---|---|---|---|
+| 1 | ⚡ Groq | LLaMA 3 8B | Cloud |
+| 2 | 🦙 Ollama | LLaMA 3 | Local |
+| 3 | 🤗 Hugging Face | Mistral 7B Instruct | Cloud |
+| 4 | ✨ Google Gemini | Gemini 1.5 Flash | Cloud |
+| 5 | 🌊 Cohere | Command-R | Cloud |
 
 ---
 
@@ -10,16 +38,19 @@ Built for the CampusPe Generative AI course assignment.
 
 ```
 ai-api-integration/
-├── groq_example.py          # Groq — LLaMA 3 (cloud, very fast)
-├── ollama_example.py        # Ollama — local models (no API key needed)
-├── huggingface_example.py   # Hugging Face — Mistral 7B (cloud)
-├── gemini_example.py        # Google Gemini 1.5 Flash (cloud)
-├── cohere_example.py        # Cohere Command-R (cloud)
-├── multi_api_query.py       # Bonus: CLI unified interface + side-by-side comparison
-├── requirements.txt         # Python dependencies
-├── .env                     # Your API keys (DO NOT commit this!)
-├── .gitignore               # Keeps .env out of Git
-└── screenshots/
+│
+├── 📄 groq_example.py           # Groq — LLaMA 3 via cloud API
+├── 📄 ollama_example.py         # Ollama — runs 100% locally
+├── 📄 huggingface_example.py    # Hugging Face — Mistral 7B
+├── 📄 gemini_example.py         # Google Gemini 1.5 Flash
+├── 📄 cohere_example.py         # Cohere Command-R
+├── 📄 multi_api_query.py        # ★ Bonus — unified CLI for all providers
+│
+├── 📄 requirements.txt          # All Python dependencies
+├── 📄 .env                      # Your API keys (never commit this!)
+├── 📄 .gitignore                # Excludes .env from Git
+│
+└── 📁 screenshots/
     ├── groq.png
     ├── llama.png
     ├── hugging_face.png
@@ -30,7 +61,7 @@ ai-api-integration/
 
 ---
 
-## Setup Instructions
+## Setup
 
 ### 1. Clone the repository
 
@@ -39,14 +70,18 @@ git clone <your-repo-url>
 cd ai-api-integration
 ```
 
-### 2. Create a virtual environment (recommended)
+### 2. Create a virtual environment
 
 ```bash
 python -m venv venv
+```
 
-# Activate it:
-source venv/bin/activate        # macOS / Linux
-venv\Scripts\activate           # Windows
+```bash
+# Activate — macOS / Linux
+source venv/bin/activate
+
+# Activate — Windows
+venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
@@ -55,131 +90,158 @@ venv\Scripts\activate           # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Add your API keys to `.env`
+### 4. Configure your API keys
 
-Open the `.env` file and fill in your keys:
+Open the `.env` file in the project root and fill in your keys:
 
-```
+```env
 GROQ_API_KEY=your_groq_key_here
 HUGGINGFACE_API_KEY=your_hf_key_here
 GOOGLE_API_KEY=your_google_key_here
 COHERE_API_KEY=your_cohere_key_here
 ```
 
-> **Never commit the `.env` file to GitHub.** It's already listed in `.gitignore` so this should happen automatically.
+> ⚠️ **Never commit `.env` to GitHub.** It is already listed in `.gitignore` — keep it that way.
 
 ---
 
-## How to Obtain Each API Key
+## API Keys
 
-| Provider          | Where to get the key                                                         | Free tier? |
-| ----------------- | ---------------------------------------------------------------------------- | ---------- |
-| **Groq**          | [console.groq.com](https://console.groq.com/) → API Keys                     | ✅ Yes     |
-| **Hugging Face**  | [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)     | ✅ Yes     |
-| **Google Gemini** | [makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey) | ✅ Yes     |
-| **Cohere**        | [dashboard.cohere.com](https://dashboard.cohere.com/) → API Keys             | ✅ Yes     |
-| **Ollama**        | No key needed — runs locally!                                                | ✅ Free    |
+All providers have a **free tier**. Sign up at the links below:
+
+| Provider | Get your key | Free? |
+|---|---|---|
+| **Groq** | [console.groq.com](https://console.groq.com/) → API Keys | ✅ Yes |
+| **Hugging Face** | [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) | ✅ Yes |
+| **Google Gemini** | [makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey) | ✅ Yes |
+| **Cohere** | [dashboard.cohere.com](https://dashboard.cohere.com/) → API Keys | ✅ Yes |
+| **Ollama** | No key needed — install the app and run locally | ✅ Free |
 
 ---
 
-## How to Run Each Program
+## Running the Programs
 
-### Groq (LLaMA 3)
+### ⚡ Groq
+
+Queries LLaMA 3 hosted on Groq's ultra-fast inference infrastructure.
+Typical response time: **under 1 second**.
 
 ```bash
 python groq_example.py
 ```
 
-Queries Groq's hosted LLaMA 3 model. Usually responds in under a second.
-
-**Output:**
-
 ![Groq output](screenshots/groq.png)
 
 ---
 
-### Ollama (Local — LLaMA 3)
+### 🦙 Ollama (Local)
+
+Runs LLaMA 3 entirely on your own machine — no internet required after setup.
 
 ```bash
-# First, install Ollama from https://ollama.ai/
-# Then pull a model (one-time download):
+# Step 1 — install Ollama from https://ollama.ai/
+# Step 2 — pull the model (one-time download)
 ollama pull llama3
 
-# Run the script:
+# Step 3 — run the script
 python ollama_example.py
 ```
-
-Everything runs on your machine — no internet needed after the model is downloaded.
-
-**Output:**
 
 ![Ollama output](screenshots/llama.png)
 
 ---
 
-### Hugging Face
+### 🤗 Hugging Face
+
+Queries Mistral-7B-Instruct via the Hugging Face Inference API.
 
 ```bash
 python huggingface_example.py
 ```
 
-Queries Mistral-7B via the Hugging Face Inference API. The first request may take ~20 seconds while the model cold-starts (this is normal on the free tier).
-
-**Output:**
+> 💡 The first request may take ~20 seconds while the model cold-starts on the free tier. This is normal — subsequent calls are faster.
 
 ![Hugging Face output](screenshots/hugging_face.png)
 
 ---
 
-### Google Gemini
+### ✨ Google Gemini
+
+Queries Gemini 1.5 Flash — Google's fastest free-tier model.
 
 ```bash
 python gemini_example.py
 ```
 
-Queries Gemini 1.5 Flash — Google's fast, free-tier-friendly model.
-
-**Output:**
-
 ![Gemini output](screenshots/gemini.png)
 
 ---
 
-### Cohere
+### 🌊 Cohere
+
+Queries Cohere's Command-R model, optimized for conversational tasks.
 
 ```bash
 python cohere_example.py
 ```
 
-Queries Cohere's Command-R model.
-
-**Output:**
-
 ![Cohere output](screenshots/cohere.png)
 
 ---
 
-### Multi-API Query (Bonus)
+## ★ Bonus: Multi-API Query
+
+A unified CLI that lets you pick any provider interactively — or query **all 5 at once** and compare their answers side-by-side.
 
 ```bash
 python multi_api_query.py
 ```
 
-Choose any provider from a menu, or pick option **6** to query all providers simultaneously and compare their answers side-by-side.
+```
+==================================================
+  Multi-API Query Tool — Pick Your AI Provider
+==================================================
 
-**Output:**
+Available providers:
+  [1] Groq (LLaMA 3)
+  [2] Ollama (Local)
+  [3] Hugging Face
+  [4] Google Gemini
+  [5] Cohere
+  [6] Compare ALL providers
+
+Select a provider (1-6): _
+```
 
 ![Multi-API output](screenshots/multi.png)
 
 ---
 
-## Notes
+## Screenshots
 
-- API keys are loaded from the `.env` file using `python-dotenv` — they are never hardcoded.
-- Each script includes error handling for common issues (invalid keys, rate limits, model loading).
-- Ollama requires the Ollama app to be running locally before you call `ollama_example.py`.
-- Hugging Face free tier models may take ~20 seconds to respond on the first call (cold start).
+| Provider | Output |
+|---|---|
+| Groq | ![](screenshots/groq.png) |
+| Ollama | ![](screenshots/llama.png) |
+| Hugging Face | ![](screenshots/hugging_face.png) |
+| Gemini | ![](screenshots/gemini.png) |
+| Cohere | ![](screenshots/cohere.png) |
+| Multi-API | ![](screenshots/multi.png) |
 
 ---
 
-_CampusPe | Generative AI Assignment 2026_
+## Notes
+
+- All API keys are loaded from `.env` via `python-dotenv` — **never hardcoded**
+- Every script has `try/except` blocks to handle common errors gracefully (bad keys, rate limits, timeouts)
+- Ollama must be running locally (`ollama serve`) before executing `ollama_example.py`
+- Hugging Face free-tier models cold-start on the first call — wait ~20s and retry if it times out
+- Free tiers have usage limits — be mindful when running the compare-all feature repeatedly
+
+---
+
+<div align="center">
+
+*CampusPe · Tattva Code Labs · Generative AI Assignment 2026*
+
+</div>
